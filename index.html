@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Omonoia Aradippou | Match Schedule</title>
+<style>
+:root{--blue:#0b4f9c;--blue2:#2a83c8;--navy:#061b38;--panel:#0b2748;--white:#fff;--muted:#a9c7e8;--line:#24598e;--gold:#ffd166}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at 85% 5%,#174f8d 0,#081f3e 35%,#041326 78%);color:#fff;min-height:100vh}
+.wrap{max-width:1180px;margin:auto;padding:26px 18px 60px}
+.hero{position:relative;overflow:hidden;display:flex;align-items:center;gap:24px;padding:25px 28px;background:linear-gradient(90deg,#0b4f9c 0 50%,#ffffff 50% 100%);border-radius:24px;box-shadow:0 18px 55px #0006;margin-bottom:20px}
+.hero:after{content:"";position:absolute;width:260px;height:260px;border:42px solid #ffffff10;border-radius:50%;right:-70px;top:-100px}
+.crest{width:130px;height:130px;object-fit:contain;filter:drop-shadow(0 8px 12px #0003);z-index:1}.heroText{z-index:1;margin-left:auto;width:48%;padding-left:22px;color:#083f7c}.eyebrow{font-size:12px;font-weight:900;letter-spacing:.17em;color:#3476b5}.hero h1{font-size:clamp(28px,5vw,47px);margin:5px 0 3px;color:#083f7c;text-shadow:none}.hero p{margin:0;color:#567b9f;font-weight:700}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}.stat{background:#0b2748dd;border:1px solid var(--line);padding:15px 17px;border-radius:16px}.stat b{display:block;font-size:24px}.stat span{color:var(--muted);font-size:11px;font-weight:800;letter-spacing:.08em}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.filters button{border:1px solid #2e659b;background:#0b2748;color:#e9f5ff;padding:10px 18px;border-radius:999px;font-weight:800;cursor:pointer}.filters button.active{background:#fff;color:#0b4f9c;border-color:#fff}
+.next{position:relative;background:linear-gradient(110deg,#1267b7,#0b4382);border:1px solid #58a8e7;border-radius:20px;padding:21px 23px;margin:18px 0 24px;box-shadow:0 16px 45px #0005}.next small{font-weight:900;letter-spacing:.12em;color:#d7edff}.next .teams{font-size:clamp(20px,4vw,30px);font-weight:900;margin:8px 0}.next .meta{color:#e3f2ff}
+.list{display:grid;gap:10px}.match{display:grid;grid-template-columns:72px 135px 1fr 235px 112px;align-items:center;gap:13px;background:#0a2442e8;border:1px solid #204f7d;border-radius:17px;padding:15px;transition:.2s}.match:hover{transform:translateY(-2px);border-color:#4b9ad8;background:#0c2c52}
+.num{font-size:11px;color:#88b5dc;letter-spacing:.07em}.date strong{display:block;font-size:16px}.date span,.stadium span{font-size:12px;color:#a9c7e8}.teams2{font-weight:800}.our{color:#78c8ff}.badge{display:inline-block;font-size:10px;padding:4px 8px;border-radius:6px;margin-bottom:5px;font-weight:900;letter-spacing:.08em}.home{background:#fff;color:#0b4f9c}.away{background:#1d65a8;color:#fff;border:1px solid #559bda}
+.map{color:#fff;text-decoration:none;border:1px solid #4f8dc5;border-radius:9px;padding:8px 10px;text-align:center;font-size:12px;font-weight:700}.map:hover{background:#fff;color:#0b4f9c}.past{opacity:.48}.today{border-color:var(--gold)}.empty{text-align:center;color:#a9c7e8;padding:35px}
+@media(max-width:780px){.wrap{padding:14px 10px 40px}.hero{padding:18px;gap:13px;background:linear-gradient(90deg,#0b4f9c 0 50%,#fff 50% 100%)}.crest{width:88px;height:88px}.hero h1{font-size:20px;line-height:1.08}.heroText{width:49%;padding-left:8px;margin-left:auto}.hero p{font-size:10px}.eyebrow{font-size:8px;letter-spacing:.08em}.hero p{font-size:12px}.eyebrow{font-size:9px}.stats{grid-template-columns:repeat(2,1fr)}.match{grid-template-columns:68px 1fr}.stadium,.teams2,.map{grid-column:2}.date{grid-row:1 / span 3}.num{display:none}.map{width:max-content}.next{padding:17px}}
+</style>
+</head>
+<body><main class="wrap">
+<section class="hero">
+<img class="crest" src="https://seeklogo.com/images/O/omonia-fc-aradippou-logo-7D80496A9B-seeklogo.com.png" alt="Έμβλημα Ομόνοιας Αραδίππου">
+<div class="heroText"><div class="eyebrow">ΠΑΓΚΥΠΡΙΟ ΠΡΩΤΑΘΛΗΜΑ Κ15 • 2026/27</div>
+<h1>Πρόγραμμα Αγώνων Κ15</h1><p>Ομόνοια Αραδίππου • Παγκύπριο Πρωτάθλημα</p></div></section>
+<section class="stats">
+<div class="stat"><b id="total">15</b><span>ΣΥΝΟΛΟ ΑΓΩΝΩΝ</span></div>
+<div class="stat"><b id="homeCount"></b><span>ΕΝΤΟΣ ΕΔΡΑΣ</span></div>
+<div class="stat"><b id="awayCount"></b><span>ΕΚΤΟΣ ΕΔΡΑΣ</span></div>
+<div class="stat"><b id="nextDate">—</b><span>ΕΠΟΜΕΝΟΣ ΑΓΩΝΑΣ</span></div>
+</section>
+<section id="nextBox"></section>
+<nav class="filters"><button class="active" data-filter="all">Όλοι οι αγώνες</button><button data-filter="home">🏠 Εντός έδρας</button><button data-filter="away">🚌 Εκτός έδρας</button><button data-filter="upcoming">Προσεχείς αγώνες</button></nav>
+<section class="list" id="list"></section>
+</main>
+<script>
+const matches = [{no:1,date:"2026-10-11",time:"12:00",home:"Omonoia Aradippou",away:"Asil Lisis",stadium:'Voithitiko Omonoias',map:'Voithitiko Omonoias',side:"home",directMap:"https://maps.app.goo.gl/6M9bQJ5B8drqE4T26?g_st=ac"},
+{no:2,date:"2026-10-18",time:"12:00",home:"Chalkanoras Idaliou",away:"Omonoia Aradippou",stadium:'Stadium Dimitri Chamatsou',map:'Dali Stadium',side:"away"},
+{no:3,date:"2026-10-25",time:"12:00",home:"Omonoia Aradippou",away:"Paeek Kerineias",stadium:'Voithitiko Omonoias',map:'Voithitiko Omonoias',side:"home",directMap:"https://maps.app.goo.gl/6M9bQJ5B8drqE4T26?g_st=ac"},
+{no:4,date:"2026-11-01",time:"12:00",home:"AEP Polemidion",away:"Omonoia Aradippou",stadium:'Dimotiko Stadio Eirinis & Filias',map:'Polemidia Stadium',side:"away"},
+{no:5,date:"2026-11-08",time:"12:00",home:"Omonoia Aradippou",away:"Mundialito",stadium:'Voithitiko Omonoias',map:'Voithitiko Omonoias',side:"home",directMap:"https://maps.app.goo.gl/6M9bQJ5B8drqE4T26?g_st=ac"},
+{no:6,date:"2026-11-15",time:"12:00",home:"Frenaros F.C. 2000",away:"Omonoia Aradippou",stadium:'Koinotiko Stadio Frenarou',map:'Frenaros Stadium',side:"away"},
+{no:7,date:"2026-11-22",time:"12:00",home:"Omonoia Aradippou",away:"Anorthosis Mouttagiakas",stadium:'Voithitiko Omonoias',map:'Voithitiko Omonoias',side:"home",directMap:"https://maps.app.goo.gl/6M9bQJ5B8drqE4T26?g_st=ac"},
+{no:8,date:"2026-12-06",time:"12:00",home:"Digenis Akritas Morfou",away:"Omonoia Aradippou",stadium:'Dimotiko Stadio Aglantzias',map:'Aglantzia Stadium',side:"away"},
+{no:9,date:"2026-12-13",time:"12:00",home:"Omonoia Aradippou",away:"Spartakos Kitiou",stadium:'Voithitiko Omonoias',map:'Voithitiko Omonoias',side:"home",directMap:"https://maps.app.goo.gl/6M9bQJ5B8drqE4T26?g_st=ac"},
+{no:10,date:"2026-12-20",time:"12:00",home:"Krasava E.N.Y",away:"Omonoia Aradippou",stadium:'Koinotiko Stadio Trachoniou',map:'Koinotiko Kolossiou',side:"away"},
+{no:11,date:"2027-01-10",time:"12:00",home:"Omonoia Aradippou",away:"Olympiacos Soccer World",stadium:'Voithitiko Omonoias',map:'Voithitiko Omonoias',side:"home",directMap:"https://maps.app.goo.gl/6M9bQJ5B8drqE4T26?g_st=ac"},
+{no:12,date:"2027-01-17",time:"12:00",home:"Omonoia Aradippou",away:"Apea Akrotiriou",stadium:'Voithitiko Omonoias',map:'Voithitiko Omonoias',side:"home",directMap:"https://maps.app.goo.gl/6M9bQJ5B8drqE4T26?g_st=ac"},
+{no:13,date:"2027-01-24",time:"12:00",home:"F.C. Leivadia 2022",away:"Omonoia Aradippou",stadium:'Dimotiko Stadio Leivadion',map:'Koinotiko Livadion',side:"away"},
+{no:14,date:"2027-01-31",time:"12:00",home:"Omonoia Aradippou",away:"Ethnikos Defteras",stadium:'Voithitiko Omonoias',map:'Voithitiko Omonoias',side:"home",directMap:"https://maps.app.goo.gl/6M9bQJ5B8drqE4T26?g_st=ac"},
+{no:15,date:"2027-02-07",time:"12:00",home:"Apop Polis",away:"Omonoia Aradippou",stadium:'Koinotiko Stadio "Efripidis"',map:'Koinotiko Polis',side:"away"}];
+const dayNames=["Κυριακή","Δευτέρα","Τρίτη","Τετάρτη","Πέμπτη","Παρασκευή","Σάββατο"];
+const monthNames=["Ιαν","Φεβ","Μαρ","Απρ","Μάι","Ιουν","Ιουλ","Αυγ","Σεπ","Οκτ","Νοε","Δεκ"];
+const now=new Date();
+function localDate(s,t="00:00"){return new Date(s+"T"+t+":00")}
+function pretty(s){const d=localDate(s);return `${String(d.getDate()).padStart(2,"0")}/${String(d.getMonth()+1).padStart(2,"0")}/${d.getFullYear()}`}
+function day(s){return dayNames[localDate(s).getDay()]}
+function isPast(m){return localDate(m.date,m.time)<now}
+document.getElementById("homeCount").textContent=matches.filter(m=>m.side==="home").length;
+document.getElementById("awayCount").textContent=matches.filter(m=>m.side==="away").length;
+const next=matches.find(m=>!isPast(m));
+if(next){
+ document.getElementById("nextDate").textContent=`${String(localDate(next.date).getDate()).padStart(2,"0")} ${monthNames[localDate(next.date).getMonth()]}`;
+ document.getElementById("nextBox").innerHTML=`<div class="next"><small>ΕΠΟΜΕΝΟΣ ΑΓΩΝΑΣ • ${next.side==="home"?"ΕΝΤΟΣ ΕΔΡΑΣ":"ΕΚΤΟΣ ΕΔΡΑΣ"}</small><div class="teams">${next.home} <span style="opacity:.65">vs</span> ${next.away}</div><div class="meta">${day(next.date)} ${pretty(next.date)} • ${next.time} • ${next.stadium}</div></div>`;
+}
+function render(filter="all"){
+ let arr=matches.filter(m=>filter==="all" || m.side===filter || (filter==="upcoming"&&!isPast(m)));
+ const box=document.getElementById("list");
+ if(!arr.length){box.innerHTML='<div class="empty">Δεν υπάρχουν αγώνες σε αυτή την κατηγορία.</div>';return}
+ box.innerHTML=arr.map(m=>{
+   const oursHome=m.side==="home";
+   const maps=m.directMap || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(m.map)}`;
+   return `<article class="match ${isPast(m)?"past":""}">
+    <div class="num">MATCH<br><strong>#${m.no}</strong></div>
+    <div class="date"><strong>${day(m.date)}</strong><span>${pretty(m.date)} • ${m.time}</span></div>
+    <div class="teams2"><span class="badge ${m.side}">${oursHome?"ΕΝΤΟΣ":"ΕΚΤΟΣ"}</span><br><span class="${oursHome?"our":""}">${m.home}</span> <span style="color:#6e9987">—</span> <span class="${!oursHome?"our":""}">${m.away}</span></div>
+    <div class="stadium"><strong>${m.stadium}</strong><br><span>${m.map||""}</span></div>
+    <a class="map" href="${maps}" target="_blank" rel="noopener">📍 Google Maps</a>
+   </article>`
+ }).join("");
+}
+document.querySelectorAll(".filters button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".filters button").forEach(x=>x.classList.remove("active"));b.classList.add("active");render(b.dataset.filter)});
+render();
+</script></body></html>
